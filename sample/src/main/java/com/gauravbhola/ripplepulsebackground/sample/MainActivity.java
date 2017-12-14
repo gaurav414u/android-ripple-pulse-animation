@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mRipplePulseLayout = findViewById(R.id.layout_ripplepulse);
         mRipplePulseLayout.startRippleAnimation();
-        mRipplePulseLayout.stopRippleAnimation();
+//        mRipplePulseLayout.stopRippleAnimation();
     }
 
 }

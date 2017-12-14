@@ -13,12 +13,12 @@
             android:layout_height="wrap_content"
             android:clipChildren="false"
             android:layout_centerInParent="true"
-            ripple:rippleColor="@android:color/holo_blue_bright"
+            ripple:rippleColor="@android:color/holo_red_light"
             ripple:rippleType="stroke"
-            ripple:strokeWidth="1dp"
-            ripple:startRadius="20dp"
-            ripple:endRadius="100dp"
-            ripple:duration="5000"
+            ripple:strokeWidth="2dp"
+            ripple:startRadius="100dp"
+            ripple:endRadius="200dp"
+            ripple:duration="2000"
             android:id="@+id/layout_ripplepulse">
 
         <com.gauravbhola.ripplepulsebackground.sample.views.RoundedImageView
