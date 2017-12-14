@@ -15,10 +15,6 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.RelativeLayout;
 
-/**
- * Created by gauravbhola on 10/12/17.
- */
-
 public class RipplePulseLayout extends RelativeLayout {
     public static final int DEFAULT_DURATION = 2000;
     public static final String RIPPLE_TYPE_FILL = "0";
