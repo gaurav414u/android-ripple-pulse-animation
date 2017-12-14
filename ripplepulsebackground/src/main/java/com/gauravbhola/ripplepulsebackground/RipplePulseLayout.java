@@ -154,8 +154,9 @@ public class RipplePulseLayout extends RelativeLayout {
 
         @Override
         protected void onDraw(Canvas canvas) {
-            int center=(Math.min(getWidth(),getHeight()))/2;
-            canvas.drawCircle(center, center, mRadius, mPaint);
+            int centerX = getWidth()/2;
+            int centerY = getHeight()/2;
+            canvas.drawCircle(centerX, centerY, mRadius, mPaint);
         }
     }
 }
