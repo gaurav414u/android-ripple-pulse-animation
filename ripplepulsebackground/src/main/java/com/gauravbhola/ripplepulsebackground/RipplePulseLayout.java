@@ -33,6 +33,7 @@ public class RipplePulseLayout extends RelativeLayout {
     private Paint mPaint;
     private AnimatorSet mAnimatorSet;
     private boolean mIsAnimating;
+    private RippleView mRippleView;
 
 
     public RipplePulseLayout(Context context, AttributeSet attrs) {
@@ -63,59 +64,67 @@ public class RipplePulseLayout extends RelativeLayout {
         //reading the attributes
         TypedArray attrValues = context.obtainStyledAttributes(attrs, R.styleable.RipplePulseLayout);
         int color = attrValues.getColor(R.styleable.RipplePulseLayout_rippleColor, getResources().getColor(android.R.color.holo_blue_bright));
-        float startRadius = attrValues.getDimension(R.styleable.RipplePulseLayout_startRadius, getMeasuredWidth()/2);
-        float endRadius = attrValues.getDimension(R.styleable.RipplePulseLayout_endRadius, getMeasuredWidth());
+        float startRadius = attrValues.getDimension(R.styleable.RipplePulseLayout_startRadius, getMeasuredWidth());
+        float endRadius = attrValues.getDimension(R.styleable.RipplePulseLayout_endRadius, getMeasuredWidth() * 2);
         float strokeWidth = attrValues.getDimension(R.styleable.RipplePulseLayout_strokeWidth, 4);
         int duration = attrValues.getInteger(R.styleable.RipplePulseLayout_duration, DEFAULT_DURATION);
         String rippleType = attrValues.getString(R.styleable.RipplePulseLayout_rippleType);
         if (TextUtils.isEmpty(rippleType)) {
             rippleType = RIPPLE_TYPE_FILL;
         }
-
+        //initialize stuff
         initializePaint(color, rippleType, strokeWidth);
+        initializeRippleView(endRadius, startRadius, strokeWidth);
+        initializeAnimators(startRadius, endRadius, duration);
+    }
 
-        RippleView rp = new RippleView(getContext(), mPaint, startRadius);
-        LayoutParams params = new LayoutParams((int)endRadius, (int)endRadius);
+    private void initializeRippleView(float endRadius, float startRadius, float strokeWidth) {
+        mRippleView = new RippleView(getContext(), mPaint, startRadius);
+        LayoutParams params = new LayoutParams(2 * (int)(endRadius + strokeWidth), 2 * (int)(endRadius + strokeWidth));
         params.addRule(CENTER_IN_PARENT, TRUE);
-        addView(rp, params);
+        addView(mRippleView, params);
+        mRippleView.setVisibility(INVISIBLE);
+    }
 
+    private void initializeAnimators(float startRadius, float endRadius, int duration) {
         mAnimatorSet = new AnimatorSet();
-        ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(rp, "scaleX", 1f, endRadius/startRadius);
+        ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(mRippleView, "radius", startRadius, endRadius);
         scaleXAnimator.setRepeatCount(ValueAnimator.INFINITE);
 
-        ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(rp, "scaleY", 1f, endRadius/startRadius);
-        scaleYAnimator.setRepeatCount(ValueAnimator.INFINITE);
-
-        ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(rp, "alpha", 1f, 0f);
+        ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(mRippleView, "alpha", 1f, 0f);
         alphaAnimator.setRepeatCount(ValueAnimator.INFINITE);
 
         mAnimatorSet.setDuration(duration);
         mAnimatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
-        mAnimatorSet.playTogether(scaleXAnimator, scaleYAnimator, alphaAnimator);
+        mAnimatorSet.playTogether(scaleXAnimator, alphaAnimator);
     }
 
+    /**
+     * Starts the ripple animation
+     */
     public void startRippleAnimation() {
         if (mIsAnimating) {
             //already animating
             return;
         }
+        mRippleView.setVisibility(View.VISIBLE);
         mAnimatorSet.start();
         mIsAnimating = true;
     }
 
+    /**
+     * Stops the ripple animation
+     */
     public void stopRippleAnimation() {
         if (!mIsAnimating) {
             //already not animating
             return;
         }
         mAnimatorSet.end();
+        mRippleView.setVisibility(View.INVISIBLE);
         mIsAnimating = false;
     }
 
-    /**
-     * Initializes the paint with the required properties
-     * @param color
-     */
     private void initializePaint(int color, String rippleType, float strokeWidth) {
         mPaint = new Paint();
         mPaint.setColor(color);
@@ -132,6 +141,15 @@ public class RipplePulseLayout extends RelativeLayout {
     private static class RippleView extends View {
         private Paint mPaint;
         private float mRadius;
+
+        public float getRadius() {
+            return mRadius;
+        }
+
+        public void setRadius(float radius) {
+            mRadius = radius;
+            invalidate();
+        }
 
         public RippleView(Context context, Paint p, float radius) {
             super(context);
