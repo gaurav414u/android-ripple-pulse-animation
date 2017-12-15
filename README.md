@@ -11,9 +11,8 @@ The following properties can be used either in Layout or Programatically
 - `ripple_color` : ARGB color for the pulse/ripple
 - `start_radius` : Starting radius of the pulse
 - `end_radius` : Ending radius of the pulse
-- `ripple_type` : Ripple type. Accepted values : *'fill'*, *'stroke'(ring type)*
+- `ripple_type` : Ripple type. Accepted values : *'fill'*, *'stroke'*(ring type)
 - `stroke_width` : The width of the ring if using ripple_type = stroke
-- `pulse_startFromScratch` : Set to true if animation should start from the beginning
 
 ## Layout
 
@@ -40,5 +39,38 @@ The following properties can be used either in Layout or Programatically
 
 ## Activity
 ```java
+public class MainActivity extends AppCompatActivity {
+    RipplePulseLayout mRipplePulseLayout;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mRipplePulseLayout = findViewById(R.id.layout_ripplepulse);
+    }
+}
 ```
+### start animation
+```java
+mRipplePulseLayout.startRippleAnimation();
+```
+### stop animation
+```java
+mRipplePulseLayout.stopRippleAnimation();
+```
+
+License
+=======
+    Copyright 2017 **Gaurav Bhola**
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
