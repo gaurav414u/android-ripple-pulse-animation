@@ -1,5 +1,8 @@
 # android-ripple-pulse-animation
-A cool ripple and pulse background animation for android
+![](https://raw.githubusercontent.com/gaurav414u/android-ripple-pulse-animation/master/sample/images/demo1.gif)
+
+A cool ripple and pulse background animation for android with configurable color, start radius, end radius, animation duration etc.
+
 
 # Dependencies
 
@@ -59,6 +62,11 @@ mRipplePulseLayout.startRippleAnimation();
 mRipplePulseLayout.stopRippleAnimation();
 ```
 
+# Developed By
+
+* Gaurav Bhola - [gaurav414u@gmail.com](mailto:gaurav414u@gmail.com)
+
+
 License
 =======
     Copyright 2017 **Gaurav Bhola**
@@ -67,7 +75,7 @@ License
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
-        http://www.apache.org/licenses/LICENSE-2.0
+       http://www.apache.org/licenses/LICENSE-2.0
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
