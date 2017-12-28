@@ -5,6 +5,17 @@ A cool ripple and pulse background animation for android with configurable color
 
 
 # Dependencies
+```java
+dependencies {
+    compile 'com.gauravbhola.ripplepulsebackground:library:1.0.0'
+}
+```
+```java
+//for gradle 3 and above
+dependencies {
+    implementation 'com.gauravbhola.ripplepulsebackground:library:1.0.0'
+}
+```
 
 # Usage
 
