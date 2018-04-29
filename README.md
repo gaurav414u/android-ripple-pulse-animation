@@ -17,6 +17,11 @@ dependencies {
 }
 ```
 
+# Proguard
+```java
+-keep class com.gauravbhola.ripplepulsebackground.RipplePulseLayout$RippleView { *; }
+```
+
 # Usage
 
 The following properties can be used either in Layout or Programatically
